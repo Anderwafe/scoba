@@ -6,7 +6,7 @@ Current version of project consists of next libs:
 2. [Dynamic array lib](#dynarr) (not prod ready)
 
 # <a name="logging">LOGGING</a>
-`\#include [logging.h](logging.h)` // to acquire
+`#include "logging.h"` // to acquire [logging.h](logging.h) lib
 
 File consists of some macroses for doing logging:
 - LOGINFO(FILE* stream, char* fmt, ...)
