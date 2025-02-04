@@ -1,21 +1,21 @@
 # SCOBA
-~~Superior~~**Stupid C Objects By Anderwafe** - yet another collection of various C libs created for optimize programming experience.
+~~Superior~~ **Stupid C Objects By Anderwafe** - yet another collection of various C libs created for optimize programming experience.
 
 Current version of project consists of next libs:
 1. [Logging lib](#logging)
 2. [Dynamic array lib](#dynarr) (not prod ready)
 
 # <a name="logging">LOGGING</a>
-\#include [`logging.h`](logging.h) // to acquire
+`\#include [logging.h](logging.h)` // to acquire
 
-File consists of some macroses to doing logging:
+File consists of some macroses for doing logging:
 - LOGINFO(FILE* stream, char* fmt, ...)
 - LOGWARN(FILE* stream, char* fmt, ...)
 - LOGERROR(FILE* stream, int errno, char* fmt, ...)
 
-Each of this macroses takes an arguments `FILE* stream` (stdio, stdout, stderr, etc), `char* fmt, ...` as in `printf()` family functions. `LOGERROR` in addition takes `int errno` - error number which passed to `strerror()` function (`man strerror').
+Each of this macroses takes an arguments `FILE* stream` (stdio, stdout, stderr, etc), `char* fmt, ...` as in `printf()` family functions. `LOGERROR` in addition takes `int errno` - error number which passed to `strerror()` function (`man strerror`).
 
-The format of output string is: "{file}:{line}:{severity}: in func {func} ({fmt})\n", where:
+The format of output string is: `{file}:{line}:{severity}: in func {func} ({fmt})\n`, where:
 - `file` is a file name, where log was called;
 - `line` is a line in `file`, where log was called;
 - `severity` is a called log severity ("info" in `LOGINFO`, "warn" in `LOGWARN`, etc);
