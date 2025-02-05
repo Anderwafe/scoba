@@ -2,12 +2,19 @@ CC ?= gcc
 CFLAGS += -Wall -Wextra -Wconversion-extra -Wchkp -pedantic -fpic
 LDFLAGS = -shared 
 OBJECTS = dynarr.o
+BUILDDIR = ./
+RESULT = scoba.so
 
 
-all: scoba.so
+all: $(RESULT)
 
-scoba.so: $(OBJECTS)
-	$(CC) $(LDFLAGS) %^ -o scoba.so
+$(RESULT): $(OBJECTS)
+	$(CC) $(LDFLAGS) $^ -o $(BUILDDIR)$(RESULT)
 
 $(OBJECTS): %.o: %.c %.h
-	$(CC) $(CFLAGS) -c %<
+	$(CC) $(CFLAGS) -c $< -o $(BUILDDIR)$@
+
+clean:
+	cd $(BUILDDIR)
+	rm $(OBJECTS) $(RESULT)
+	cd -
