@@ -4,7 +4,7 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <assert.h>
-#include "loggingUtils.h"
+#include "logging.h"
 
 #define DYNARR_INITIAL_CAPACITY 8
 
