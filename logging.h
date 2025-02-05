@@ -18,19 +18,19 @@
 #endif
 
 #if LOG_LEVEL <= LOGLEVEL_INFO
-#define LOGINFO(stream, fmt, ...) fprintf((stream), "%s:%d:info: in func %s ("(fmt)")\n", __FILE__, __LINE__, __func__ __VA_OPT__(,) __VA_ARGS__)
+#define LOGINFO(stream, fmt, ...) fprintf((stream), "%s:%d:info: in func %s (" fmt ")\n", __FILE__, __LINE__, __func__ __VA_OPT__(,) __VA_ARGS__)
 #else
 #define LOGINFO(stream, fmt, ...) NULL
 #endif
 
 #if LOG_LEVEL <= LOGLEVEL_WARN
-#define LOGWARN(stream, fmt, ...) fprintf((stream), "%s:%d:warn: in func %s ("(fmt)")\n", __FILE__, __LINE__, __func__ __VA_OPT__(,) __VA_ARGS__)
+#define LOGWARN(stream, fmt, ...) fprintf((stream), "%s:%d:warn: in func %s (" fmt ")\n", __FILE__, __LINE__, __func__ __VA_OPT__(,) __VA_ARGS__)
 #else
 #define LOGWARN(stream, fmt, ...) NULL
 #endif
 
 #if LOG_LEVEL <= LOGLEVEL_ERROR
-#define LOGERROR(stream, errno, fmt, ...) fprintf((stream), "%s:%d:error: in func %s ([%s]: "(fmt)")\n", __FILE__, __LINE__, __func__, strerror(errno) __VA_OPT__(,) __VA_ARGS__)
+#define LOGERROR(stream, errno, fmt, ...) fprintf((stream), "%s:%d:error: in func %s ([%s]: " fmt ")\n", __FILE__, __LINE__, __func__, strerror(errno) __VA_OPT__(,) __VA_ARGS__)
 #else
 #define LOGERROR(stream, errno, fmt, ...) NULL
 #endif
