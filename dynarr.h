@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <inttypes.h>
+#include <string.h>
 #include "logging.h"
 #include "memory.h"
 
@@ -20,11 +21,10 @@
     typeof(object) _object = object; \
     typeof(newCapacity) _newCapacity = newCapacity;\
     LOGINFO(stdout, "object = %xp; newCapacity = %zu", _object, _newCapacity);\
-    /*void* temp = realloc((_object)->elements, (_newCapacity) * sizeof(typeof(*((_object)->elements)))); */\
     void* temp = memory_recalloc(_object->elements, sizeof(typeof(*((_object)->elements))), _newCapacity);\
     if(temp == NULL) { \
         LOGERROR(stderr, errno, "Cannot realloc the elements, %d -> %d", _object->capacity, _newCapacity); \
-        exit(EXIT_FAILURE) \
+        exit(EXIT_FAILURE); \
     } \
     (_object)->elements = (typeof((_object)->elements))temp; \
     (_object)->capacity = (_newCapacity); \
@@ -59,11 +59,18 @@
     _object->elements[_object->count++] = _item;\
 } while(0)
 
-#define DYNARR_INSERT(object, item, index) 
+#define DYNARR_INSERT(object, item, index) do{\
+    typeof(object) _object = object;\
+    typeof(item) _item = item;\
+    typeof(index) _index = index;\
+    if(_object->count >= _index) {\
+        DYNARR_APPEND(_object, 0)\
+        memmove(_object->elements+_index, _object->elements+_index+1, _object
 
 #define DYNARR_REMOVE(object, index)
 
-#define DYNARR_CLEAR(object)
+#define DYNARR_CLEAR(object) (object)->count = 0
+    
 
 #define DYNARR_FIND(object, item)
 
