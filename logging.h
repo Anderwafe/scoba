@@ -30,9 +30,9 @@
 #endif
 
 #if LOG_LEVEL <= LOGLEVEL_ERROR
-#define LOGERROR(stream, errno, fmt, ...) fprintf((stream), "%s:%d:error: in func %s ([%s]: " fmt ")\n", __FILE__, __LINE__, __func__, strerror(errno) __VA_OPT__(,) __VA_ARGS__)
+#define LOGERROR(stream, fmt, ...) fprintf((stream), "%s:%d:error: in func %s (" fmt ")\n", __FILE__, __LINE__, __func__ __VA_OPT__(,) __VA_ARGS__)
 #else
-#define LOGERROR(stream, errno, fmt, ...) NULL
+#define LOGERROR(stream, fmt, ...) NULL
 #endif
 
 #endif
