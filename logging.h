@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stddef.h>
+#include <stdarg.h>
 
 #define LOGLEVEL_INFO  0
 #define LOGLEVEL_WARN  1
@@ -18,27 +19,47 @@
 #endif
 
 #if LOG_LEVEL <= LOGLEVEL_INFO
-#define LOGINFO(stream, fmt, ...) fprintf((stream), "%s:%d:info: in func %s (" fmt ")\n", __FILE__, __LINE__, __func__ __VA_OPT__(,) __VA_ARGS__)
+#define LOGINFO(stream, ...) do {                                               \
+    FILE* _stream = stream;                                                     \
+    fprintf(_stream, "%s:%d:info: in func %s (", __FILE__, __LINE__, __func__); \
+    fprintf(_stream, __VA_ARGS__);                                              \
+    fprintf(_stream, ")\n");                                                    \
+} while(0)
 #else
-#define LOGINFO(stream, fmt, ...) NULL
+#define LOGINFO(stream, ...) NULL
 #endif
 
 #if LOG_LEVEL <= LOGLEVEL_WARN
-#define LOGWARN(stream, fmt, ...) fprintf((stream), "%s:%d:warn: in func %s (" fmt ")\n", __FILE__, __LINE__, __func__ __VA_OPT__(,) __VA_ARGS__)
+#define LOGWARN(stream, ...) do {                                               \
+    FILE* _stream = stream;                                                     \
+    fprintf(_stream, "%s:%d:warn: in func %s (", __FILE__, __LINE__, __func__); \
+    fprintf(_stream, __VA_ARGS__);                                              \
+    fprintf(_stream, ")\n");                                                    \
+} while(0)
 #else
-#define LOGWARN(stream, fmt, ...) NULL
+#define LOGWARN(stream, ...) NULL
 #endif
 
 #if LOG_LEVEL <= LOGLEVEL_ERROR
-#define LOGERROR(stream, fmt, ...) fprintf((stream), "%s:%d:error: in func %s (" fmt ")\n", __FILE__, __LINE__, __func__ __VA_OPT__(,) __VA_ARGS__)
+#define LOGERROR(stream, ...) do {                                              \
+    FILE* _stream = stream;                                                     \
+    fprintf(_stream, "%s:%d:error: in func %s (", __FILE__, __LINE__, __func__);\
+    fprintf(_stream, __VA_ARGS__);                                              \
+    fprintf(_stream, ")\n");                                                    \
+} while(0)
 #else
-#define LOGERROR(stream, fmt, ...) NULL
+#define LOGERROR(stream, ...) NULL
 #endif
 
 #ifndef NDEBUG
-#define LOGDEBUG(fmt, ...) fprintf(stderr, "%s:%d:debug: in func %s (" fmt ")\n", __FILE__, __LINE__, __func__ __VA_OPT__(,) __VA_ARGS__)
+#define LOGDEBUG(stream, ...) do {                                              \
+    FILE* _stream = stream;                                                     \
+    fprintf(_stream, "%s:%d:debug: in func %s (", __FILE__, __LINE__, __func__);\
+    fprintf(_stream, __VA_ARGS__);                                              \
+    fprintf(_stream, ")\n");                                                    \
+} while(0)
 #else
-#define LOGDEBUG(fmt, ...) NULL
+#define LOGDEBUG(stream, ...) NULL
 #endif
 
 #endif
