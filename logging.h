@@ -35,4 +35,10 @@
 #define LOGERROR(stream, fmt, ...) NULL
 #endif
 
+#ifndef NDEBUG
+#define LOGDEBUG(fmt, ...) fprintf(stderr, "%s:%d:debug: in func %s (" fmt ")\n", __FILE__, __LINE__, __func__ __VA_OPT__(,) __VA_ARGS__)
+#else
+#define LOGDEBUG(fmt, ...) NULL
+#endif
+
 #endif
